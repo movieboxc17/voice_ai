@@ -4,12 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Voice Isolation Tool</title>
+  <style>
+    /* Dark Mode Styles */
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: #bb86fc;
+    }
+
+    button {
+      background-color: #1f1f1f;
+      color: #e0e0e0;
+      border: 1px solid #bb86fc;
+      border-radius: 5px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    button:hover {
+      background-color: #bb86fc;
+      color: #1f1f1f;
+    }
+
+    button:active {
+      background-color: #3700b3;
+      color: #e0e0e0;
+    }
+
+    p {
+      margin: 20px 0;
+      font-size: 1.2em;
+    }
+
+    #status {
+      color: #03dac5;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <h1>Live Voice Isolation</h1>
   <button id="start">Start Isolation</button>
   <button id="stop">Stop Isolation</button>
   <p id="status">Status: Not started</p>
+
   <script>
     let audioContext;
     let microphone;
@@ -23,7 +74,6 @@
 
       processor.onaudioprocess = (event) => {
         const input = event.inputBuffer.getChannelData(0);
-        // Placeholder for AI isolation processing
         const output = event.outputBuffer.getChannelData(0);
         for (let i = 0; i < input.length; i++) {
           output[i] = input[i]; // Replace with processed audio
